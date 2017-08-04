@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var multer = require('multer'); // v1.0.5
+var upload = multer(); // for parsing multipart/form-dataire('multer');
 var mongoose = require('mongoose');
 var cors = require('cors');
 var session = require('express-session');
@@ -36,10 +38,15 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', './images/favicon.png')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.post('/personal_blog_node', upload.array(), function (req, res, next) {
+  console.log(req.body);
+  res.json(req.body);
+});
+
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
