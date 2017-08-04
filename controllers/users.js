@@ -11,8 +11,8 @@ exports.create_user = function (req, res, next) {
     }, function (err, user) {
             if (err) {
                 res.json({
-                    code: 500,
-                    message: "something error",
+                    code: err.code,
+                    message: err.errmsg,
                 });
             } else {
                 res.json({
