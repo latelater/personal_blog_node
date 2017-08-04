@@ -14,6 +14,14 @@ const UserSchema = new Schema({
         type: String,
         default: '',
         require: true
+    },
+    introduce: {
+        type: String,
+        default: '暂无',
+    },
+    nick_logo: {
+        type: String,
+        default: '../public/images/nick.png'
     }
 });
 

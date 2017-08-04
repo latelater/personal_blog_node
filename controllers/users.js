@@ -2,8 +2,8 @@ const User = require('../models/usersInfo').User;
 const pinyin = require('pinyin');
 
 exports.create_user = function (req, res, next) {
-    var username = req.body.username;
-    var password = req.body.password;
+    let username = req.body.username;
+    let password = req.body.password;
     console.log(req.body);
     console.log(`username: ${username}\npassword: ${password}`);
 
