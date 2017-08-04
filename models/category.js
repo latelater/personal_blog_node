@@ -1,36 +1,27 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const AticleSchema = new Schema({
+const CategorySchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         require: true
     },
-    title: {
+    category_name: {
         type: String,
         default: '',
         require: true
     },
-    content: {
-        type: String,
-        default: 'an empty aticle'
-    },
-    aticle_date: {
+    create_date: {
         type: Date,
         default: '',
         require: true
     },
-    // 文章大分类
-    category: { 
+    aticle: {
         type: Schema.Types.ObjectId,
-        ref: 'Category',
+        ref: 'Aticle',
         require: true
-    },
-    // author: {
-    //     type: String,
-    //     default: User.username,
-    // }
+    }
 });
 
-exports.Aticle = mongoose.model('Aticle', AticleSchema);
+exports.Category = mongoose.model('Category', CategorySchema);
