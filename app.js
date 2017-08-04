@@ -4,11 +4,32 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var cors = require('cors');
+var session = require('express-session');
+var mongoStore = require('connect-mongo')(session);
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+var options = {
+	server: {
+		socketOptions: {
+			keepAlive: 300000, connectTimeoutMS: 30000
+		}
+	},
+	replset: {
+		socketOptions: {
+			keepAlive: 300000, connectTimeoutMS: 30000
+		}
+	}
+};
+
+// 连接mongodb
+mongoose.connect('mongodb://127.0.0.1/personal_blog_node', options);
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, '链接错误'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,6 +42,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
+
+app.use(session({
+    secret: 'personal_blog_node',
+    store: new mongoStore({
+        url: 'mongodb://127.0.0.1/personal_blog_node',
+        collection: 'session'
+    }),
+    resave: true,
+    saveUninitialized: true
+}));
+
+app.use(express.static('public'));
 
 app.use('/', index);
 app.use('/users', users);
