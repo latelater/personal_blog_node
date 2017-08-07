@@ -10,5 +10,5 @@ class myDate {
     }
 }
 
-export default myDate;
+// export default myDate;
 
