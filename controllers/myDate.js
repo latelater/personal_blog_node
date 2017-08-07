@@ -1,13 +1,43 @@
 class myDate {
+
     constructor() {
         this.date = new Date();
-        this.nowDate = Date.now().getDate();
     }
 
-    printNowDate() {
-        console.log(this.nowDate);
-        return this.nowDate;
+    /**
+     * bool format 日期格式
+     * true 中国
+     * false 默认
+     */
+    getNowDate(format) {
+        // console.log(Date.now);
+        let nowDate = this.date;
+        let d = this.date.getDate();
+        let y = this.date.getFullYear();
+        let m = this.date.getMonth() + 1;
+        let hh = this.date.getHours();
+        let mm = this.date.getMinutes();
+        let ss = this.date.getSeconds();
+        if(format) {
+            nowDate = y + "年" + m + "月" + d + "日" + " " + hh + ":" + mm;
+        }
+        return nowDate;
     }
+
+    getNowDay(format) {
+        let day = this.date.getDay();
+        let weekList1 = new Array("日", "一", "二", "三", "四", "五", "六");
+        let weekList2 = new Array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
+        let week = this.date.getDay();
+        if(format) {
+            day  = "星期" + weekList1[week];
+        } else {
+            day = weekList2[week];
+        }
+
+        return day;
+    }
+
 }
 
 export default myDate;
