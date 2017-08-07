@@ -1,4 +1,4 @@
-import myDate from "./myDate"
+import myDate from "../BaseModels/MyDate"
 
 exports.getNowDate = function(req, res, next) {
     let date = new myDate();
