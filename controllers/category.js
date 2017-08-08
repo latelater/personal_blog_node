@@ -11,7 +11,6 @@ exports.createCategory = function(req, res, next) {
         console.log(category_name);
     }
 
-
     let date = new myDate();
     let createDate = date.getNowDate();
 

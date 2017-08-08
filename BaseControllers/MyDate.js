@@ -9,7 +9,7 @@ class myDate {
      * true 中国
      * false 默认
      */
-    getNowDate(format) {
+    getNowDate(format = false) {
         // console.log(Date.now);
         let nowDate = this.date;
         let d = this.date.getDate();
@@ -24,7 +24,7 @@ class myDate {
         return nowDate;
     }
 
-    getNowDay(format) {
+    getNowDay(format = false) {
         let day = this.date.getDay();
         let week_list1 = new Array("日", "一", "二", "三", "四", "五", "六");
         let week_list2 = new Array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
