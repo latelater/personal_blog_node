@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-import myDate from "../BaseControllers/MyDate";
+import myDate from "../utils/MyDate";
 const Schema = mongoose.Schema;
 
 let date = new myDate();

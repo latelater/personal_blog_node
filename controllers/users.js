@@ -1,8 +1,8 @@
-import {code as codeMsg} from '../utils/code'
+import {code as codeMsg} from '../utils/code';
 import {Category} from '../models/categoryList';
 import {User} from '../models/usersInfo';
-import encryptClass from "../BaseControllers/Encrypt";
-import myDate from "../BaseControllers/MyDate";
+import encryptClass from "../utils/Encrypt";
+import myDate from "../utils/MyDate";
 
 exports.create_user = function (req, res, next) {
     let username = req.body.username;
@@ -63,5 +63,20 @@ exports.login = function(req, res, next) {
             }
         }
     });
+};
+
+exports.user_info = function(req, res, next) {
+    let username = req.body.username;
+    User.findOne({
+        username: username
+    }, function(err, user) {
+        if(user) {
+            res.json({
+                req: req
+            })
+        } else {  
+          
+        }
+    })
 };
 

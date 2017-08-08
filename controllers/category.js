@@ -1,7 +1,7 @@
-import {code as codeMsg} from '../utils/code'
+import {code as codeMsg} from '../utils/code';
 import {Category} from '../models/categoryList';
 import {User} from '../models/usersInfo';
-import myDate from "../BaseControllers/MyDate";
+import myDate from "../utils/MyDate";
 
 exports.createCategory = function(req, res, next) {
     let username = req.body.username;

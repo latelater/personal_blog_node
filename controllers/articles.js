@@ -2,7 +2,7 @@ import {code as codeMsg} from '../utils/code'
 import {Category} from '../models/categoryList';
 import {User} from '../models/usersInfo';
 import {Article} from '../models/articleList';
-import myDate from "../BaseControllers/MyDate";
+import myDate from "../utils/MyDate";
 /**
  * category_name
  * title
