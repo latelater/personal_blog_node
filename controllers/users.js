@@ -72,7 +72,6 @@ exports.user_info = function(req, res, next) {
     }, function(err, user) {
         if(user) {
             res.json({
-                req: req
             })
         } else {  
           

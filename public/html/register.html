@@ -11,33 +11,64 @@
         <form>    
             <div>
                 <span>username: </span>
-                <input type="text" name="username" value="">
+                <input type="text" id="username" value="">
             </div>
             <div>
                 <span> password: </span>
-                <input type="text" name="password" value="">
+                <input type="text" id="password" value="">
             </div>
             <div>
                 <span>confirm password: </span>
                 <input type="text" name="confirm_pass" value="">
             </div>
+            <div>
+                <button type="button" id="login_btn">login in</button>
+            </div>
         </form>
 
         <script>
-            function test() {
-                let user = document.getElementsByName("username");
-                let password = document.getElementsByName("password")
-                let users = {
-                    user: user,
-                    password: password
-                };
+            function getDate() {
+                var name = document.getElementById('username').value;
+                var password = document.getElementById('password').value;
 
-                return users;
+                // POST请求
+                var req = new XMLHttpRequest();
+                // OPEN
+                req.open('POST', '/user/login');
+                // req.open('POST', '/user/create_user');
+                // 设置请求头部信息
+                req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                // 指定服务端返回的数据类型
+                req.responseType = 'json';
+                // 发起请求
+                req.send('username=' + name + '&password=' + password);
+
+                // 添加监听事件
+                req.onload = function (e) {
+                    if (this.status === 200) {
+                        // 获取服务端返回的数据
+                        console.log("this.response chenggong");
+                        if (this.response.code === 200) {
+                            alert("this.response chenggong");
+                            // console.log(this.response.data);
+                            // saveUserStorage(this.response.data);
+                            // getUserStorage();
+                            // window.location.href='index.html';
+                        } else {
+                            alert("cuo wu");
+                            // AddSpan("div_span", this.response.message);
+                        }
+                    }else {
+                        alert('网络错误');
+                        // AddSpan("div_span", "网络错误");
+                    }
+                }
+
             }
 
-            let request = new XMLHttpRequest()
-
-            let url = '1233234让4似懂非懂重复';
+            document.getElementById("login_btn").onclick = function () {
+                getDate();
+            };
         </script>
     </body>
 </html>
