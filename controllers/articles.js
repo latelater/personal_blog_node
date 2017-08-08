@@ -4,12 +4,9 @@ import {User} from '../models/usersInfo';
 import {Article} from '../models/articleList';
 import myDate from "../BaseControllers/MyDate";
 /**
- * username
  * category_name
- * article {
- *  title: '123'
- *  content: '1234567890'
- * }
+ * title
+ * content
  */
 exports.createArticle = function(req, res, next) {
     // let username = req.body.username;
