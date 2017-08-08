@@ -1,7 +1,10 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+import User from './usersInfo';
+import Category from './categoryList'
 const Schema = mongoose.Schema;
 
-const AticleSchema = new Schema({
+const ArticleSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User',
@@ -14,23 +17,27 @@ const AticleSchema = new Schema({
     },
     content: {
         type: String,
-        default: 'an empty aticle'
+        default: 'an empty article'
     },
-    aticle_date: {
+    article_date: {
         type: Date,
         default: '',
         require: true
     },
     // 文章大分类
-    category: { 
-        type: Schema.Types.ObjectId,
-        ref: 'Category',
-        require: true
-    },
+    category_name: {
+        type: String,
+        default: '我是未分类'
+    }
+    // category: { 
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Category',
+    //     require: true
+    // },
     // author: {
     //     type: String,
     //     default: User.username,
     // }
 });
 
-exports.Aticle = mongoose.model('Aticle', AticleSchema);
+exports.Article = mongoose.model('Article', ArticleSchema);

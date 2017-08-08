@@ -4,6 +4,7 @@ import {code as codeMsg} from '../utils/code'
 import {Category} from '../models/categoryList';
 import {User} from '../models/usersInfo';
 import encryptClass from "../BaseModels/Encrypt";
+import myDate from "../BaseModels/MyDate";
 
 exports.create_user = function (req, res, next) {
     let username = req.body.username;
@@ -11,6 +12,9 @@ exports.create_user = function (req, res, next) {
 
     let encryptedObj = new encryptClass();
     let encryptedStr = encryptedObj.encryptedPass(password);
+
+    let date = new myDate();
+    let createDate = date.getNowDate(true);
 
     User.create({
         username: username,
@@ -27,6 +31,18 @@ exports.create_user = function (req, res, next) {
                     code: 200,
                     message: codeMsg['200'],
                     data: user._id
+                });
+
+                Category.create({
+                    user: user,
+                    category_name: "我是未分类",
+                    create_date: createDate,
+                }, function(err, category) {
+                    if(err) {
+                        console.log(err);
+                    } else {
+                        console.log("wo cheng gong le")
+                    }
                 });
             }
         }

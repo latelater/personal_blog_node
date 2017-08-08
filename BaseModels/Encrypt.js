@@ -2,9 +2,9 @@
 import Crypto from 'crypto';
 class encryptClass {
 
-    encryptedPass(password) {
+    encryptedPass(str) {
         const hash = Crypto.createHash('sha256');
-        hash.update(password);
+        hash.update(str);
         let encryptedPass = hash.digest('hex');
         return encryptedPass;
     }

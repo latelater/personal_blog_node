@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
+import myDate from "../BaseModels/MyDate";
 const Schema = mongoose.Schema;
-
+/**
+ * 文章分类
+ */
 const CategorySchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
@@ -9,18 +12,17 @@ const CategorySchema = new Schema({
     },
     category_name: {
         type: String,
-        default: '',
+        default: '我是未分类',
         require: true
     },
     create_date: {
-        type: Date,
+        type: String,
         default: '',
         require: true
     },
-    aticle: {
+    article: {
         type: Schema.Types.ObjectId,
-        ref: 'Aticle',
-        require: true
+        ref: 'Article',
     }
 });
 
