@@ -37,7 +37,7 @@ exports.createCategory = function(req, res, next) {
                         if(err) {
                             res.json({
                                 code: err.code,
-                                message: codeMsg[err.code] || codeMsg['10107'],
+                                message: codeMsg[err.code] || codeMsg['500'],
                                 data: err.message
                             })
                         } else {
@@ -50,8 +50,8 @@ exports.createCategory = function(req, res, next) {
                     });
                 } else {
                     res.json({
-                        code: 10108,
-                        message: codeMsg['10108'],
+                        code: 10107,
+                        message: codeMsg['10107'],
                         data:category
                     })
                 }

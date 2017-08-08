@@ -29,16 +29,11 @@ const ArticleSchema = new Schema({
         require: true
     },
     // 文章大分类
-    category_name: {
-        type: String,
-        default: '我是未分类',
+    category: { 
+        type: Schema.Types.ObjectId,
+        ref: 'Category',
         require: true
-    }
-    // category: { 
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'Category',
-    //     require: true
-    // },
+    },
     // author: {
     //     type: String,
     //     default: User.username,

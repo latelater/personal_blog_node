@@ -10,6 +10,6 @@ router.get('/', function(req, res, next) {
 });
 router.post('/user/create_user', user.create_user);
 router.post('/user/login', user.login);
-router.get('/articles/getNowDate', articles.getNowDate);
+router.post('/articles/createArticle', articles.createArticle);
 router.post('/category/createCategory', category.createCategory);
 module.exports = router;

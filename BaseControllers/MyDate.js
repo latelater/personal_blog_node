@@ -26,13 +26,13 @@ class myDate {
 
     getNowDay(format) {
         let day = this.date.getDay();
-        let weekList1 = new Array("日", "一", "二", "三", "四", "五", "六");
-        let weekList2 = new Array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
+        let week_list1 = new Array("日", "一", "二", "三", "四", "五", "六");
+        let week_list2 = new Array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
         let week = this.date.getDay();
         if(format) {
-            day  = "星期" + weekList1[week];
+            day  = "星期" + week_list1[week];
         } else {
-            day = weekList2[week];
+            day = week_list2[week];
         }
 
         return day;
