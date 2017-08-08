@@ -1,8 +1,8 @@
 import {code as codeMsg} from '../utils/code'
 import {Category} from '../models/categoryList';
 import {User} from '../models/usersInfo';
-import encryptClass from "../BaseModels/Encrypt";
-import myDate from "../BaseModels/MyDate";
+import encryptClass from "../BaseControllers/Encrypt";
+import myDate from "../BaseControllers/MyDate";
 
 exports.create_user = function (req, res, next) {
     let username = req.body.username;

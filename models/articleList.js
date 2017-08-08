@@ -2,7 +2,7 @@
 import mongoose from 'mongoose';
 import User from './usersInfo';
 import Category from './categoryList'
-import myDate from "../BaseModels/MyDate";
+import myDate from "../BaseControllers/MyDate";
 const Schema = mongoose.Schema;
 
 let date = new myDate();
