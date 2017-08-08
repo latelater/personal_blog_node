@@ -1,5 +1,3 @@
-// const User = require('../models/usersInfo').User;
-// const Category = require('../models/categoryList').Category;
 import {code as codeMsg} from '../utils/code'
 import {Category} from '../models/categoryList';
 import {User} from '../models/usersInfo';
@@ -12,9 +10,6 @@ exports.create_user = function (req, res, next) {
 
     let encryptedObj = new encryptClass();
     let encryptedStr = encryptedObj.encryptedPass(password);
-
-    let date = new myDate();
-    let createDate = date.getNowDate(true);
 
     User.create({
         username: username,
@@ -30,19 +25,7 @@ exports.create_user = function (req, res, next) {
                 res.json({
                     code: 200,
                     message: codeMsg['200'],
-                    data: user._id
-                });
-
-                Category.create({
-                    user: user,
-                    category_name: "我是未分类",
-                    create_date: createDate,
-                }, function(err, category) {
-                    if(err) {
-                        console.log(err);
-                    } else {
-                        console.log("wo cheng gong le")
-                    }
+                    data: user
                 });
             }
         }

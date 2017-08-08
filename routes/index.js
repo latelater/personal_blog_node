@@ -2,6 +2,7 @@ let express = require('express');
 let router = express.Router();
 let user = require('../controllers/users');
 let articles = require('../controllers/articles');
+let category = require('../controllers/category');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -10,4 +11,5 @@ router.get('/', function(req, res, next) {
 router.post('/user/create_user', user.create_user);
 router.post('/user/login', user.login);
 router.get('/articles/getNowDate', articles.getNowDate);
+router.post('/category/createCategory', category.createCategory);
 module.exports = router;

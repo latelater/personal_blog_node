@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 import myDate from "../BaseModels/MyDate";
 const Schema = mongoose.Schema;
+
+let date = new myDate();
+let createDate = date.getNowDate();
 /**
  * 文章分类
  */
@@ -16,14 +19,14 @@ const CategorySchema = new Schema({
         require: true
     },
     create_date: {
-        type: String,
-        default: '',
+        type: Date,
+        default: createDate,
         require: true
     },
-    article: {
-        type: Schema.Types.ObjectId,
-        ref: 'Article',
-    }
+    // article: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Article',
+    // }
 });
 
 exports.Category = mongoose.model('Category', CategorySchema);

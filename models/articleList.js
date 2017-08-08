@@ -2,7 +2,11 @@
 import mongoose from 'mongoose';
 import User from './usersInfo';
 import Category from './categoryList'
+import myDate from "../BaseModels/MyDate";
 const Schema = mongoose.Schema;
+
+let date = new myDate();
+let createDate = date.getNowDate();
 
 const ArticleSchema = new Schema({
     user: {
@@ -21,13 +25,14 @@ const ArticleSchema = new Schema({
     },
     article_date: {
         type: Date,
-        default: '',
+        default: createDate,
         require: true
     },
     // 文章大分类
     category_name: {
         type: String,
-        default: '我是未分类'
+        default: '我是未分类',
+        require: true
     }
     // category: { 
     //     type: Schema.Types.ObjectId,

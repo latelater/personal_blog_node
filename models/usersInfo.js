@@ -1,7 +1,11 @@
 
 
 const mongoose = require('mongoose');
+import myDate from "../BaseModels/MyDate";
 const Schema = mongoose.Schema;
+
+let date = new myDate();
+let createDate = date.getNowDate();
 
 const UserSchema = new Schema({
     username: {
@@ -22,6 +26,10 @@ const UserSchema = new Schema({
     nick_logo: {
         type: String,
         default: '../public/images/nick.png'
+    },
+    create_date: {
+        type: Date,
+        default: createDate
     }
 });
 
