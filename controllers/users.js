@@ -49,6 +49,8 @@ exports.login = function(req, res, next) {
             let encryptedObj = new encryptClass();
             let encryptedStr = encryptedObj.encryptedPass(password);
             if(user.password === encryptedStr) {
+                req.session.user = user;
+                console.log(req.session.user);
                 res.json({
                     code: 200,
                     message: codeMsg['200'],

@@ -42,28 +42,70 @@
                 // 添加监听事件
                 req.onload = function (e) {
                     if (this.status === 200) {
-                        // 获取服务端返回的数据
+                        // 获取服务端返回的数据this.response
                         console.log("this.response chenggong");
                         if (this.response.code === 200) {
                             alert("this.response chenggong");
                             //重定向
                             // window.location.href='index.html';
-                            //拿到后端返回值
                             let data = this.response.data;
                             console.log(data);
                         } else {
                             alert("cuo wu");
                         }
-                    }else {
+                    } else {
                         alert('网络错误');
                     }
                 }
 
             }
 
+            // var lala = {
+            //     "name": "zhangchi",
+            //     "age": "1234"
+            // }
+            // let btn = document.getElementById('login_btn');
+            // btn.setAttribute('onclick', `getDate('${lala["name"]}')`);
+
             document.getElementById("login_btn").onclick = function () {
                 getDate();
+                let obj = {"a-1": "woshia", "b-2": "woshib"}
             };
+                
+            // 登录后向createArticle发数据新建文章
+            // let category_name = "javascript笔记";
+            //         let title = "javascript lalalal";
+            //         let content = "lalalalalalalallaaaaa"
+            //          // POST请求
+            //         let req = new XMLHttpRequest();
+            //         // OPEN
+            //         req.open('POST', '/articles/createArticle');
+            //         // req.open('POST', '/user/create_user');
+            //         // 设置请求头部信息
+            //         req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            //         // 指定服务端返回的数据类型
+            //         req.responseType = 'json';
+            //         // 发起请求
+            //         req.send('category_name=' + category_name + '&title=' + title + '&content=' + content);
+
+            //         // 添加监听事件
+            //         req.onload = function (e) {
+            //             if (this.status === 200) {
+            //                 // 获取服务端返回的数据this.response
+            //                 console.log(this.response.code);
+            //                 if (this.response.code === 200) {
+            //                     alert("article chenggong");
+            //                     //重定向
+            //                     // window.location.href='index.html';
+            //                     let data = this.response.data;
+            //                     console.log(data);
+            //                 } else {
+            //                     alert("cuo wu");
+            //                 }
+            //             } else {
+            //                 alert('网络错误');
+            //             }
+            //         }
         </script>
     </body>
 </html>

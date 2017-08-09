@@ -3,7 +3,7 @@ let router = express.Router();
 let user = require('../controllers/users');
 let articles = require('../controllers/articles');
 let category = require('../controllers/category');
-let authorization = require('../utils/authorization')
+let authorization = require('../utils/authorization');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
