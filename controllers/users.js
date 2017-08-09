@@ -72,12 +72,43 @@ exports.user_info = function(req, res, next) {
     User.findOne({
         username: username
     }, function(err, user) {
-        if(user) {
+        if(err) {
             res.json({
+                code: err.code,
+                message: codeMsg[err.code] || codeMsg['10103'],
+                data: ''
             })
-        } else {  
-          
+        } else if(user) {  
+            res.json({
+                code: 200,
+                message: codeMsg['200'],
+                data: user
+            })
         }
     })
+};
+
+
+exports.updateUserInfo = function(req, res, next) {
+    let user_id = req.body.user._id
+    let user = req.body.user
+    User.update({
+        _id: user_id
+    },{user})
+    // User.findOne({
+    //     username: username
+    // }, function(err, user) {
+    //     if(err){
+    //         res.json({
+    //             code: err.code,
+    //             message: codeMsg[err.code] || codeMsg['10103'],
+    //             data: ''
+    //         })
+    //     } else if(user) {
+    //         user.update({
+
+    //         })
+    //     }
+    // })
 };
 

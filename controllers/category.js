@@ -5,7 +5,7 @@ import myDate from "../utils/MyDate";
 
 exports.createCategory = function(req, res, next) {
     let username = req.body.username;
-    let category_name = "我是未分类";    
+    let category_name = "我是未分类";
     if(req.body.category_name) {
         category_name = req.body.category_name;
         console.log(category_name);
