@@ -1,25 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>register</title>
+        <title>login</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="css/style.css" rel="stylesheet">
+        <link href="../stylesheets/style.css" rel="stylesheet">
     </head>
     <body>
-        <h2>register</h2>
+        <h2>login</h2>
         <form>    
             <div>
                 <span>username: </span>
-                <input type="text" id="username" value="">
+                <input type="text"name="username" value="">
             </div>
             <div>
                 <span> password: </span>
-                <input type="text" id="password" value="">
-            </div>
-            <div>
-                <span>confirm password: </span>
-                <input type="text" name="confirm_pass" value="">
+                <input type="text" name="password" value="">
             </div>
             <div>
                 <button type="button" id="login_btn">login in</button>
@@ -28,11 +24,11 @@
 
         <script>
             function getDate() {
-                var name = document.getElementById('username').value;
-                var password = document.getElementById('password').value;
+                let name = document.getElementsByName('username')[0].value;
+                let password = document.getElementsByName('password')[0].value;
 
                 // POST请求
-                var req = new XMLHttpRequest();
+                let req = new XMLHttpRequest();
                 // OPEN
                 req.open('POST', '/user/login');
                 // req.open('POST', '/user/create_user');
@@ -50,17 +46,16 @@
                         console.log("this.response chenggong");
                         if (this.response.code === 200) {
                             alert("this.response chenggong");
-                            // console.log(this.response.data);
-                            // saveUserStorage(this.response.data);
-                            // getUserStorage();
+                            //重定向
                             // window.location.href='index.html';
+                            //拿到后端返回值
+                            let data = this.response.data;
+                            console.log(data);
                         } else {
                             alert("cuo wu");
-                            // AddSpan("div_span", this.response.message);
                         }
                     }else {
                         alert('网络错误');
-                        // AddSpan("div_span", "网络错误");
                     }
                 }
 
