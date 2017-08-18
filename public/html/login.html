@@ -23,7 +23,7 @@
         </form>
 
         <script>
-            function getDate(a) {
+            function getDate() {
                 // console.log(a)
                 let name = document.getElementsByName('username')[0].value;
                 let password = document.getElementsByName('password')[0].value;
@@ -67,19 +67,18 @@
             // }
             // let btn = document.getElementById('login_btn');
             // btn.setAttribute('onclick', `getDate('${lala["name"]}')`);
-            for(let i = 0; i < 3; i ++){
-                console.log(i)
-                document.getElementById("login_btn").onclick = function () {
-                    console.log(`shi wo ${i}`)
-                    console.log(document.getElementById("login_btn").onclick)
-                    // getDate(a);
-                };
-            }
+            // for(var i = 0; i < 3; i ++){
+            //     console.log(i)
+            //     document.getElementById("login_btn").onclick = function () {
+            //         console.log(`shi wo ${i}`)
+            //         console.log(document.getElementById("login_btn").onclick)
+            //         // getDate(a);
+            //     };
+            // }
 
-            // document.getElementById("login_btn").onclick = function (b) {
-            //     console.log(`shi wo ${b}`)
-            //     getDate(a);
-            // };
+            document.getElementById("login_btn").onclick = function () {
+                getDate();
+            };
                 
             // 登录后向createArticle发数据新建文章
             // let category_name = "javascript笔记";

@@ -1,4 +1,4 @@
-import {code as codeMsg} from '../utils/code'
+import {code as codeMsg} from '../utils/code';
 import {Category} from '../models/categoryList';
 import {User} from '../models/usersInfo';
 import {Article} from '../models/articleList';
@@ -46,6 +46,24 @@ exports.createArticle = function(req, res, next) {
             res.json({
                 code: err.code,
                 message: codeMsg[err.code] || codeMsg['404'],
+                data: ''
+            })
+        }
+    })
+}
+
+exports.articleList = function(req, res, next) {
+    Article.find({}, function(err, articles) {
+        if(articles) {
+            res.json({
+                code: 200,
+                message: codeMsg['200'],
+                data: articles
+            })
+        } else {
+            res.json({
+                code: 500,
+                message: codeMsg['500'],
                 data: ''
             })
         }
