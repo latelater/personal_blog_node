@@ -50,15 +50,49 @@ exports.createArticle = function(req, res, next) {
             })
         }
     })
-}
+};
 
 exports.articleList = function(req, res, next) {
+    let articlesDate = []
     Article.find({}, function(err, articles) {
         if(articles) {
+            for(var i = 0; i < articles.length; i++) {
+                let article = articles[i];
+                let articleDate = {
+                    title: article.title,
+                    author: "",
+                    article_date: article.article_date,
+                    content: article.content,
+                    category_name: ""
+                };
+
+                if(article.user) {
+                    User.findOne({
+                        _id: article.user
+                    }, function(err, user) {
+                        if(user) {
+                            articleDate.author = user.username;
+                            console.log(articleDate.author)
+                        }
+                    })
+                }
+
+                if(article.category) {
+                    Category.findOne({
+                        _id: article.category
+                    }, function(err, category){
+                        if(category) {
+                            articleDate.category_name = category.category_name;
+                        }
+                    })
+                }
+                console.log(articleDate);
+                articlesDate[i] = articleDate;
+            }
             res.json({
                 code: 200,
                 message: codeMsg['200'],
-                data: articles
+                data: articlesDate
             })
         } else {
             res.json({
