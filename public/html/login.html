@@ -24,96 +24,55 @@
 
         <script>
             function getDate() {
-                // console.log(a)
+                console.log("333333333333333")
                 let name = document.getElementsByName('username')[0].value;
                 let password = document.getElementsByName('password')[0].value;
-
-                // POST请求
-                let req = new XMLHttpRequest();
-                // OPEN
-                req.open('POST', '/user/login');
-                // req.open('POST', '/user/create_user');
-                // 设置请求头部信息
-                req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                // 指定服务端返回的数据类型
-                req.responseType = 'json';
-                // 发起请求
-                req.send('username=' + name + '&password=' + password);
-
-                // 添加监听事件
-                req.onload = function (e) {
-                    if (this.status === 200) {
-                        // 获取服务端返回的数据this.response
-                        console.log("this.response chenggong");
-                        if (this.response.code === 200) {
-                            alert("this.response chenggong");
-                            //重定向
-                            // window.location.href='index.html';
-                            let data = this.response.data;
-                            console.log(data);
+                return new Promise(function(resolve, reject) {
+                    let req = new XMLHttpRequest();
+                    // OPEN
+                    req.open('POST', '/user/login');
+                    // req.open('POST', '/user/create_user');
+                    // 设置请求头部信息
+                    req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                    // 指定服务端返回的数据类型
+                    req.responseType = 'json';
+                    
+                    // 添加监听事件
+                    req.onload = function (e) {
+                        console.log("bbbbb")
+                        if (this.status === 200) {
+                            // 获取服务端返回的数据this.response
+                            console.log("this.response chenggong");
+                            if (this.response.code === 200) {
+                                alert("this.response chenggong");
+                                //重定向
+                                // window.location.href='index.html';
+                                let data = this.response.data;
+                                resolve(data);                               
+                                // console.log(data);
+                            } else {
+                                alert("cuo wu");
+                                reject("cuo wu");
+                            }
                         } else {
-                            alert("cuo wu");
+                            alert('网络错误');
+                            reject("网络错误");
+                            
                         }
-                    } else {
-                        alert('网络错误');
                     }
-                }
-
+                    req.send('username=' + name + '&password=' + password);                    
+                })            
             }
 
-            // var lala = {
-            //     "name": "zhangchi",
-            //     "age": "1234"
-            // }
-            // let btn = document.getElementById('login_btn');
-            // btn.setAttribute('onclick', `getDate('${lala["name"]}')`);
-            // for(var i = 0; i < 3; i ++){
-            //     console.log(i)
-            //     document.getElementById("login_btn").onclick = function () {
-            //         console.log(`shi wo ${i}`)
-            //         console.log(document.getElementById("login_btn").onclick)
-            //         // getDate(a);
-            //     };
-            // }
 
             document.getElementById("login_btn").onclick = function () {
-                getDate();
+                getDate().then(function(data) {
+                    console.log(data, "***************");
+                }, function(err) {
+                    console.log(err, "##################");
+                })  ;
             };
-                
-            // 登录后向createArticle发数据新建文章
-            // let category_name = "javascript笔记";
-            //         let title = "javascript lalalal";
-            //         let content = "lalalalalalalallaaaaa"
-            //          // POST请求
-            //         let req = new XMLHttpRequest();
-            //         // OPEN
-            //         req.open('POST', '/articles/createArticle');
-            //         // req.open('POST', '/user/create_user');
-            //         // 设置请求头部信息
-            //         req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            //         // 指定服务端返回的数据类型
-            //         req.responseType = 'json';
-            //         // 发起请求
-            //         req.send('category_name=' + category_name + '&title=' + title + '&content=' + content);
-
-            //         // 添加监听事件
-            //         req.onload = function (e) {
-            //             if (this.status === 200) {
-            //                 // 获取服务端返回的数据this.response
-            //                 console.log(this.response.code);
-            //                 if (this.response.code === 200) {
-            //                     alert("article chenggong");
-            //                     //重定向
-            //                     // window.location.href='index.html';
-            //                     let data = this.response.data;
-            //                     console.log(data);
-            //                 } else {
-            //                     alert("cuo wu");
-            //                 }
-            //             } else {
-            //                 alert('网络错误');
-            //             }
-            //         }
+    
         </script>
     </body>
 </html>
