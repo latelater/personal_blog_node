@@ -53,7 +53,14 @@ exports.createArticle = function(req, res, next) {
 };
 
 exports.articleList = function(req, res, next) {
-    let articlesDate = []
+    let articlesDate = [];
+    let gen = getArticles(req, res, next);
+    gen.next();
+    gen.next();
+    gen.next();
+};
+
+ function* getArticles(req, res, next){
     Article.find({}, function(err, articles) {
         if(articles) {
             for(var i = 0; i < articles.length; i++) {
@@ -67,18 +74,18 @@ exports.articleList = function(req, res, next) {
                 };
 
                 if(article.user) {
-                    User.findOne({
+                    yield User.findOne({
                         _id: article.user
                     }, function(err, user) {
                         if(user) {
                             articleDate.author = user.username;
-                            console.log(articleDate.author)
+                            console.log(articleDate.author);
                         }
                     })
                 }
 
                 if(article.category) {
-                    Category.findOne({
+                    yield Category.findOne({
                         _id: article.category
                     }, function(err, category){
                         if(category) {
@@ -87,7 +94,7 @@ exports.articleList = function(req, res, next) {
                     })
                 }
                 console.log(articleDate);
-                articlesDate[i] = articleDate;
+                yield articlesDate[i] = articleDate;
             }
             res.json({
                 code: 200,
@@ -102,4 +109,5 @@ exports.articleList = function(req, res, next) {
             })
         }
     })
+    // return res;
 }
