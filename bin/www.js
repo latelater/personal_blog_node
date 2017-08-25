@@ -4,6 +4,8 @@
  * Module dependencies.
  */
 
+require('babel-register');
+require('babel-polyfill');
 var app = require('../app');
 var debug = require('debug')('personal-blog-node:server');
 var http = require('http');

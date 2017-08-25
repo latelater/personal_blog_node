@@ -3,6 +3,7 @@ import {Category} from '../models/categoryList';
 import {User} from '../models/usersInfo';
 import {Article} from '../models/articleList';
 import myDate from "../utils/MyDate";
+// var async = require('async');
 /**
  * category_name
  * title
@@ -52,15 +53,8 @@ exports.createArticle = function(req, res, next) {
     })
 };
 
-exports.articleList = function(req, res, next) {
+exports.articleList = async function(req, res, next) {
     let articlesDate = [];
-    let gen = getArticles(req, res, next);
-    gen.next();
-    gen.next();
-    gen.next();
-};
-
- function* getArticles(req, res, next){
     Article.find({}, function(err, articles) {
         if(articles) {
             for(var i = 0; i < articles.length; i++) {
@@ -74,18 +68,16 @@ exports.articleList = function(req, res, next) {
                 };
 
                 if(article.user) {
-                    yield User.findOne({
-                        _id: article.user
-                    }, function(err, user) {
-                        if(user) {
-                            articleDate.author = user.username;
-                            console.log(articleDate.author);
+                    await userPromise(article).then((data) => {
+                        if(data.username) {
+                            articleDate.author = data.username;
+                            console.log(articleDate.author); 
                         }
                     })
                 }
 
                 if(article.category) {
-                    yield Category.findOne({
+                    Category.findOne({
                         _id: article.category
                     }, function(err, category){
                         if(category) {
@@ -94,7 +86,7 @@ exports.articleList = function(req, res, next) {
                     })
                 }
                 console.log(articleDate);
-                yield articlesDate[i] = articleDate;
+                articlesDate[i] = articleDate;
             }
             res.json({
                 code: 200,
@@ -109,5 +101,18 @@ exports.articleList = function(req, res, next) {
             })
         }
     })
-    // return res;
+};
+
+function userPromise(article) {
+    return new Promise(function(resolve,rejected) {
+        User.findOne({
+            _id: article.user
+        }, function(err, user) {
+            if(user) {
+                resolve(user);
+            } else {
+                rejected(err);
+            }
+        })
+    })
 }
