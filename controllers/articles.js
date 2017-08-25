@@ -62,75 +62,30 @@ exports.articleList = async function(req, res, next) {
             message: codeMsg['500'],
             data: ''
         })
+        return ;
     }
     
     for (let i = 0; i < articles.length; i++) {
         const article = articles[i];
-        if (article.user) {
-            const user = await User.findOne({
-                _id: article.user
-            });
-            article.author = user.username;
+        let articleDate = {
+            title: article.title,
+            author: "",
+            article_date: article.article_date,
+            content: article.content,
+            category_name: ""
+        };
+        if (article.user && article.category) {
+            const [user, category] = await Promise.all([userPromise(article), categoryPromise(article)]);
+            articleDate.category_name = category.category_name;
+            articleDate.author = user.username;
         }
-
-        if (article.category) {
-            const category = Category.findOne({_id: article.category});
-            article.categoryName = category.category_name;
-        }
+        articlesDate[i] = articleDate;
     }
-    console.log(articles);
     res.json({
         code: 200,
         message: codeMsg['200'],
         data: articlesDate
     });
-    
-    // Article.find({}, function(err, articles) {
-    //     if(articles) {
-    //         for(var i = 0; i < articles.length; i++) {
-    //             let article = articles[i];
-    //             let articleDate = {
-    //                 title: article.title,
-    //                 author: "",
-    //                 article_date: article.article_date,
-    //                 content: article.content,
-    //                 category_name: ""
-    //             };
-
-    //             if(article.user) {
-    //                 await userPromise(article).then((data) => {
-    //                     if(data.username) {
-    //                         articleDate.author = data.username;
-    //                         console.log(articleDate.author); 
-    //                     }
-    //                 })
-    //             }
-
-    //             if(article.category) {
-    //                 Category.findOne({
-    //                     _id: article.category
-    //                 }, function(err, category){
-    //                     if(category) {
-    //                         articleDate.category_name = category.category_name;
-    //                     }
-    //                 })
-    //             }
-    //             console.log(articleDate);
-    //             articlesDate[i] = articleDate;
-    //         }
-    //         res.json({
-    //             code: 200,
-    //             message: codeMsg['200'],
-    //             data: articlesDate
-    //         })
-    //     } else {
-    //         res.json({
-    //             code: 500,
-    //             message: codeMsg['500'],
-    //             data: ''
-    //         })
-    //     }
-    // })
 };
 
 function userPromise(article) {
@@ -146,3 +101,17 @@ function userPromise(article) {
         })
     })
 }
+
+function categoryPromise(article) {
+    return new Promise(function(resolve,rejected) {
+        Category.findOne({_id: article.category}, function(err, category) {
+            if(category) {
+                resolve(category);
+            } else {
+                rejected(err);
+            }
+        });
+    })
+}
+
+
