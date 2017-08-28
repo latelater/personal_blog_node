@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 import myDate from "../utils/MyDate";
+mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
 
 let date = new myDate();

@@ -14,4 +14,5 @@ router.post('/user/user_info', authorization.requireLogin, user.user_info);
 router.post('/articles/createArticle', authorization.requireLogin, articles.createArticle);
 router.post('/category/createCategory', authorization.requireLogin, category.createCategory);
 router.get('/articles/articleList', articles.articleList);
+router.get('/category/categoryArticles', category.categoryArticles);
 module.exports = router;

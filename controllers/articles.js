@@ -3,7 +3,6 @@ import {Category} from '../models/categoryList';
 import {User} from '../models/usersInfo';
 import {Article} from '../models/articleList';
 import myDate from "../utils/MyDate";
-// var async = require('async');
 /**
  * category_name
  * title
