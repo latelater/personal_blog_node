@@ -103,7 +103,7 @@ exports.categoryArticles = async function (req, res, next) {
     } else {
         for(var i = 0; i < categories.length; i++) {
             let category_item = await getArticleName(categories[i]);
-            let category_date = await getArticleDate(categories[i]);
+            let category_date = await getArticleDate(categories[i], category_articles);
             Object.assign(category_articles.custom, category_item);
             // Object.assign(category_articles.date, category_date);
         }
@@ -118,7 +118,6 @@ exports.categoryArticles = async function (req, res, next) {
 function searchArticles(category) {
     return new Promise(function(resolve,rejected) {
         Article.find({category: category}, function(err, articles) {
-
             if(articles) {
                 resolve(articles);
             } else {
@@ -128,18 +127,51 @@ function searchArticles(category) {
     })
 }
 
-async function getArticleDate(category) {
+async function getArticleDate(category, category_articles) {
     let articleDates = [];
-    let articleDateY = [];
-    let articleDateM = [];
+    let articleDateYY = [];
+    let articleDateMM = [];
+    let yearObj = {};
     let articles = await searchArticles(category._id);
     articles.forEach(function(article) {
         articleDates.push(article.article_date);
     }, this);
-    articleDates.forEach(function(articleDate) {
-        console.log(articleDate.getFullYear());
+    articleDates.sort(function(a, b){  
+        return a < b ? 1 : -1;  
+    });
 
-    }, this)
+    // 求年份的列表
+    for(let i = 0, j = 0; i < articleDates.length; i++) {
+        let year = articleDates[i].getFullYear();
+        let yearObj = {
+            [year]:{}
+        }
+        Object.assign(category_articles.date, yearObj);
+        
+        if(j != 0) {
+            if(year != articleDateYY[j-1]) {
+                articleDateYY.push(year); 
+                j ++;
+            }
+        } else {
+            articleDateYY.push(year);
+            j ++;
+        }
+    }
+
+    console.log(category_articles.date);
+    console.log(articleDateYY);
+
+    // for(let i = 0; i < articleDates.length; i++){
+    //     let year = articleDates[i].getFullYear();
+    //     let month = this.date.getMonth() + 1;
+    //     for(let yy of articleDateYY) {
+    //         if(yy == articleDateYY) {
+
+    //         }
+    //     }        
+    // }
+
 
 }
 async function getArticleName(category) {

@@ -13,9 +13,12 @@ exports.createArticle = function(req, res, next) {
     let category_name = req.body.category_name;
     let title = req.body.title;
     let content = req.body.content;
-
-    let date = new myDate();
-    let createDate = date.getNowDate();
+    let date = new Date();
+    if(req.body.date) {
+        date = new Date(req.body.date);
+    }
+    // let createDate = date.getNowDate();
+    console.log(date, "新建的日期");
 
     Category.findOne({
         category_name: category_name
@@ -25,7 +28,7 @@ exports.createArticle = function(req, res, next) {
                 user: category.user,
                 title: title,
                 content: content,
-                article_date: createDate,
+                article_date: date,
                 category: category
             }, function(err, article) {
                 if(err) {

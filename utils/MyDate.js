@@ -1,7 +1,18 @@
 class myDate {
-
-    constructor() {
-        this.date = new Date();
+    // var today = new Date('1995-08-17T03:24:00')
+    constructor(date) {
+        if(date) {
+            try{
+                this.date = new Date(date); 
+                throw new Error("Invalid Date");
+            } catch(err) {
+                
+            } finally{
+                this.date = new Date();  
+            }
+        } else {
+            this.date = new Date();
+        }
     }
 
     /**
