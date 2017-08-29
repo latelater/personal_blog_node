@@ -103,8 +103,9 @@ exports.categoryArticles = async function (req, res, next) {
     } else {
         for(var i = 0; i < categories.length; i++) {
             let category_item = await getArticleName(categories[i]);
-            let category_date = await getArticleDate(categories[i], category_articles);
             Object.assign(category_articles.custom, category_item);
+            
+            let category_date = await getArticleDate(categories[i], category_articles);
             // Object.assign(category_articles.date, category_date);
         }
         res.json({
@@ -129,14 +130,14 @@ function searchArticles(category) {
 
 async function getArticleDate(category, category_articles) {
     let articleDates = [];
-    let articleDateYY = [];
-    let articleDateMM = [];
-    let yearObj = {};
+    // let articleDateYY = [];
+    // let articleDateMM = [];
+    // let yearObj = {};
     let articles = await searchArticles(category._id);
     articles.forEach(function(article) {
         articleDates.push(article.article_date);
     }, this);
-    articleDates.sort(function(a, b){  
+    articleDates.sort(function(a, b) {  
         return a < b ? 1 : -1;  
     });
 
@@ -147,30 +148,25 @@ async function getArticleDate(category, category_articles) {
             [year]:{}
         }
         Object.assign(category_articles.date, yearObj);
-        
-        if(j != 0) {
-            if(year != articleDateYY[j-1]) {
-                articleDateYY.push(year); 
-                j ++;
-            }
-        } else {
-            articleDateYY.push(year);
-            j ++;
-        }
     }
 
-    console.log(category_articles.date);
-    console.log(articleDateYY);
 
-    // for(let i = 0; i < articleDates.length; i++){
-    //     let year = articleDates[i].getFullYear();
-    //     let month = this.date.getMonth() + 1;
-    //     for(let yy of articleDateYY) {
-    //         if(yy == articleDateYY) {
-
-    //         }
-    //     }        
-    // }
+    for(let i = 0; i < articleDates.length; i++){
+        let year = articleDates[i].getFullYear();
+        let month = articleDates[i].getMonth() + 1;
+        for(let key in category_articles.date) {    
+            if(year == key) {
+                // category_articles.date[key] = {}
+                let monthObj = {
+                    [month]: []
+                };
+                console.log(key, monthObj);
+                Object.assign(category_articles.date[key], monthObj);
+                console.log(category_articles.date[key], "***********");
+                
+            }
+        }
+    }
 
 
 }
@@ -186,17 +182,4 @@ async function getArticleName(category) {
     };
     return category_item;
 }
-//  "date": {
-//             // "2017年":{
-//             //     "6月": [
-//             //         article1,
-//             //         article2
-//             //     ]
-//             // },
-//             // "2016年": {
-//             //     "6月": [
-//             //         article1,
-//             //         article2
-//             //     ] 
-//             // }
-//         }
+
