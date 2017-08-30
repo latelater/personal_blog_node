@@ -5,8 +5,8 @@ class encryptClass {
     encryptedPass(str) {
         const hash = Crypto.createHash('sha256');
         hash.update(str);
-        let encryptedPass = hash.digest('hex');
-        return encryptedPass;
+        let encryptedPassword = hash.digest('hex');
+        return encryptedPassword;
     }
     
 }

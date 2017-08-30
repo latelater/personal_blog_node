@@ -4,7 +4,7 @@ exports.requireLogin = function(req, res, next) {
     let session = req.session.user;
     console.log(session);
     if(session) {
-        console.log("session cun zai")
+        console.log("session cun zai");
         return next()
     } else {
         return res.json({
@@ -13,4 +13,4 @@ exports.requireLogin = function(req, res, next) {
             data: ''
         });
     }
-}
+};

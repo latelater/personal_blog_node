@@ -1,21 +1,21 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var multer = require('multer'); // v1.0.5
-var upload = multer(); // for parsing multipart/form-dataire('multer');
-var mongoose = require('mongoose');
-var cors = require('cors');
-var session = require('express-session');
-var mongoStore = require('connect-mongo')(session);
+let express = require('express');
+let path = require('path');
+let favicon = require('serve-favicon');
+let logger = require('morgan');
+let cookieParser = require('cookie-parser');
+let bodyParser = require('body-parser');
+let multer = require('multer'); // v1.0.5
+let upload = multer(); // for parsing multipart/form-dataire('multer');
+let mongoose = require('mongoose');
+let cors = require('cors');
+let session = require('express-session');
+let mongoStore = require('connect-mongo')(session);
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+let index = require('./routes/index');
+let users = require('./routes/users');
 
-var app = express();
-var options = {
+let app = express();
+let options = {
 	server: {
 		socketOptions: {
 			keepAlive: 300000, connectTimeoutMS: 30000
@@ -30,7 +30,7 @@ var options = {
 
 // 连接mongodb
 mongoose.connect('mongodb://127.0.0.1/personal_blog_node', options);
-var db = mongoose.connection;
+let db = mongoose.connection;
 db.on('error', console.error.bind(console, '链接错误'));
 
 // view engine setup
@@ -68,7 +68,7 @@ app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  let err = new Error('Not Found');
   err.status = 404;
   next(err);
 });

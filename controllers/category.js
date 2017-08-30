@@ -114,7 +114,7 @@ exports.categoryArticles = async function (req, res, next) {
             data:category_articles
         })
     }
-}
+};
 
 function searchArticles(category) {
     return new Promise(function(resolve,rejected) {
@@ -146,7 +146,7 @@ async function getArticleDate(category, category_articles) {
         let year = articleDates[i].getFullYear();
         let yearObj = {
             [year]:{}
-        }
+        };
         Object.assign(category_articles.date, yearObj);
     }
 
@@ -154,6 +154,7 @@ async function getArticleDate(category, category_articles) {
     for(let i = 0; i < articleDates.length; i++){
         let year = articleDates[i].getFullYear();
         let month = articleDates[i].getMonth() + 1;
+        console.log(category_articles.date, "category_articles.date");
         for(let key in category_articles.date) {    
             if(year == key) {
                 // category_articles.date[key] = {}
@@ -163,12 +164,9 @@ async function getArticleDate(category, category_articles) {
                 console.log(key, monthObj);
                 Object.assign(category_articles.date[key], monthObj);
                 console.log(category_articles.date[key], "***********");
-                
             }
         }
     }
-
-
 }
 async function getArticleName(category) {
     let categoryName = category.category_name;
